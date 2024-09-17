@@ -8,7 +8,9 @@ module.exports = class DisciplinaService {
 
     static async addDisciplina(disciplina) {
         return prisma.disciplina.create({
-            data: {...disciplina}
+            data: {
+                nome: disciplina.nome
+            }
         })
     }
 

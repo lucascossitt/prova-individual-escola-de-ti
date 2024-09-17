@@ -18,8 +18,8 @@ module.exports = class CursoService {
         return prisma.curso.create({
             data: {
                 nome: curso.nome,
-                cargaHoraria: curso.cargaHoraria,
-                dataInicio: new Date(curso.dataInicio).toISOString()
+                cargaHoraria: parseInt(curso.cargaHoraria),
+                dataInicio: curso.dataInicio
             }
         })
     }
@@ -35,8 +35,8 @@ module.exports = class CursoService {
             where: {id: curso.id},
             data: {
                 nome: curso.nome,
-                cargaHoraria: curso.cargaHoraria,
-                dataInicio: new Date(curso.dataInicio).toISOString()
+                cargaHoraria: parseInt(curso.cargaHoraria),
+                dataInicio: curso.dataInicio
             }
         })
     }

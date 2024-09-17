@@ -1,7 +1,27 @@
 const express = require('express')
+const {z} = require('zod')
 const DisciplinaService = require('../services/disciplina.service')
 
 const router = express.Router()
+const criarDisciplinaSchema = z.object({
+    id: z.number().int().nonnegative(),
+    nome: z.string().max(255)
+})
+const editarDisciplinaSchema = z.object({
+    id: z.number().int().nonnegative(),
+    nome: z.string().max(255)
+})
+const deletarDisciplinaSchema = z.object({
+    id: z.number().int().nonnegative()
+})
+const validate = (schema) => (req, res, next) => {
+    try {
+        schema.parse(req.body)
+        next()
+    } catch (err) {
+        return res.status(400).json({ error: err.errors })
+    }
+}
 
 router.get('/', async function (req, res) {
     try {
@@ -13,7 +33,7 @@ router.get('/', async function (req, res) {
     }
 })
 
-router.post('/', async function (req, res) {
+router.post('/', validate(criarDisciplinaSchema), async function (req, res) {
     try {
         const disciplinaInfo = req.body
 
@@ -25,7 +45,7 @@ router.post('/', async function (req, res) {
     }
 })
 
-router.put('/', async function (req, res) {
+router.put('/', validate(editarDisciplinaSchema), async function (req, res) {
     try {
         const disciplinaInfo = req.body
 
@@ -37,7 +57,7 @@ router.put('/', async function (req, res) {
     }
 })
 
-router.delete('/', async function (req, res) {
+router.delete('/', validate(deletarDisciplinaSchema), async function (req, res) {
     try {
         const idDisciplina = req.body.id
 

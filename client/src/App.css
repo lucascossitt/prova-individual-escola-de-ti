@@ -1,0 +1,18 @@
+.App {
+  display: flex; /* Usando Flexbox para alinhar os componentes */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  min-height: 100vh; /* Define a altura mínima da viewport */
+  color: black; /* Cor do texto, ajuste conforme necessário */
+}
+
+.container {
+  display: flex; /* Coloca Cursos e Disciplinas lado a lado */
+  align-items: stretch; /* Faz com que ambos os componentes tenham a mesma altura */
+}
+
+.divider {
+  width: 2px; /* Largura da linha vertical */
+  background-color: #ccc; /* Cor da linha */
+  margin: 0 20px; /* Margem ao redor da linha */
+}
